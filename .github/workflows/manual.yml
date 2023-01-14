@@ -34,11 +34,13 @@ jobs:
     needs: Greetings
     name: Build Release
     runs-on: ubuntu-latest
-    steps:    
-      - name: Checkout code
-        uses: actions/checkout@main
+    steps:
       - name: Install depedencies
         run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
+      - name: Checkout code
+        uses: actions/checkout@main
+      - name: Test
+        run: ls -la
       - name: Do the build
         run: cd deb-get && sudo bash deb-build.sh
   Release:
