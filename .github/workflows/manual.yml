@@ -9,7 +9,8 @@ on:
     tags:
       - 'v*'
 
-name: Create Release      
+name: Create Release
+
 jobs:
   build: 
     name: Create Release
@@ -30,7 +31,7 @@ jobs:
         with:
           tag_name: ${{ github.run_number }}
           release_name: ${{ github.run_number }}
-          
+
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
