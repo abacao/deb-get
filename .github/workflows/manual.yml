@@ -33,7 +33,23 @@ jobs:
       run: ls -la 
     - name: Install depedencies
       run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
-    - name: Clone
-      run: git clone https://github.com/abacao/deb-get.git
-    - name: Do the build
-      run: cd deb-get && sudo bash deb-build.sh
+    #- name: Clone
+    #  run: git clone https://github.com/abacao/deb-get.git
+    #- name: Do the build
+    #  run: cd deb-get && sudo bash deb-build.sh
+    - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
