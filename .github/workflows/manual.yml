@@ -43,21 +43,21 @@ jobs:
         run: ls -la
       - name: Doing the build
         run: sudo bash deb-build.sh
-      - name: create Release
-        id: create_release
+      - name: Create GitHub Release
+        id: create-new-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_number }}
           release_name: ${{ github.run_number }}
-      - name: upload release 
+      - name: Upload release asset
         id: upload-id-reset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: ../deb-get_0.3.6-1_all.deb
           asset_name: deb-get_0.3.6-1_all.deb
           asset_content_type: application/binary
