@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Doing the build
         run: sudo bash deb-build.sh
-      - name: ls -la
+      - name: list files
+        run: ls -la
       - name: Create GitHub Release
         id: create-new-release
         uses: actions/create-release@v1
