@@ -32,7 +32,7 @@ jobs:
       # All these commands should return a 0 status
       - name: Test zero status
         run: |
-          chmod a+x ./deb-get
+          sudo chmod a+x ./deb-get
           ./deb-get list --raw >/dev/null
           ./deb-get prettylist >/dev/null
           ./deb-get csvlist >/dev/null
