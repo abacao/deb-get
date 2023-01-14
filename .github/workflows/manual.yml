@@ -41,24 +41,23 @@ jobs:
         uses: actions/checkout@main
       - name: Test
         run: ls -la
-      - name: Do the build
+      - name: Doing the build
         run: sudo bash deb-build.sh
-  Release:
-    needs: Build
-    name: Release Release
-    runs-on: ubuntu-latest
-    steps:    
       - name: create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_number }}
           release_name: ${{ github.run_number }}
-  # Upload:
-  #   needs: Release
-  #   name : Upload release
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: upload release
-  #       uses: 
+      - name: upload release 
+        id: upload-id-reset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ../deb-get_0.3.6-1_all.deb
+          asset_name: deb-get_0.3.6-1_all.deb
+          asset_content_type: application/binary
