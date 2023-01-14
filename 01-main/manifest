@@ -85,7 +85,7 @@ influxdb
 influxdb2
 influxdb2-cli
 insomnia
-insync
+#insync
 ipfs-desktop
 irccloud-desktop
 iriunwebcam
