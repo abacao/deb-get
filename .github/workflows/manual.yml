@@ -42,7 +42,7 @@ jobs:
       - name: Test
         run: ls -la
       - name: Do the build
-        run: cd deb-get && sudo bash deb-build.sh
+        run: sudo bash deb-build.sh
   Release:
     needs: Build
     name: Release Release
