@@ -33,10 +33,10 @@ jobs:
       - name: Test zero status
         run: |
           sudo chmod a+x ./deb-get
-          ./deb-get list --raw >/dev/null
-          ./deb-get prettylist >/dev/null
-          ./deb-get csvlist >/dev/null
-          ./deb-get show deb-get >/dev/null
+          ./deb-get list --raw
+          ./deb-get prettylist
+          ./deb-get csvlist
+          ./deb-get show deb-get
           ./deb-get help >/dev/null
           ./deb-get update >/dev/null
           ./deb-get cache >/dev/null
