@@ -37,12 +37,13 @@ jobs:
     #  run: git clone https://github.com/abacao/deb-get.git
     #- name: Do the build
     #  run: cd deb-get && sudo bash deb-build.sh
-  build:
+  build: greet
+    needs: 
     name: Create Release
     runs-on: ubuntu-latest
     steps:    
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
