@@ -14,8 +14,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Doing the build
         run: sudo bash deb-build.sh
-      - name: list files
+      - name: simulate build
+        run: echo "simulate"
+      - name: list files1
         run: ls -la
+      - name: list files2
+        run: ls -la ..
+      - name: list files3
+        run: ls -la /home/runner/work/deb-get/deb-get
       - name: Create GitHub Release
         id: create-new-release
         uses: actions/create-release@v1
