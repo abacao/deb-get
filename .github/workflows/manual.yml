@@ -31,3 +31,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: List files
       run: ls -la 
+    - name: Clone
+      run: git clone https://github.com/abacao/deb-get.git
+    - name: Do the build
+      run: cd deb-get && sudo bash deb-build.sh
