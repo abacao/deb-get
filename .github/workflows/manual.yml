@@ -10,7 +10,7 @@ jobs:
       - name: Install depedencies
         run: sudo apt-get install curl #build-essential devscripts debhelper apt apt-transport-https bash coreutils dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       #- name: Doing the build
       #  run: sudo bash deb-build.sh
       - name: simulate build
