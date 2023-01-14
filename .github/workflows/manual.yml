@@ -31,6 +31,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: List files
       run: ls -la 
+    - name: Install depedencies
+      run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
     - name: Clone
       run: git clone https://github.com/abacao/deb-get.git
     - name: Do the build
