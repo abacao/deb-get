@@ -1,25 +1,31 @@
-name: 👋 Greetings
+name: 01-main Tests
 
-on: [pull_request, issues]
+on:
+  pull_request:
+    types: [opened, closed, synchronize]
+    paths:
+      - "01-main/packages/*"
+  workflow_dispatch:
 
 jobs:
-  greeting:
+  tests:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: |
-          Hello there 👋
-          Thanks for submitting your first issue to the deb-get project 🐛 We'll try and take a look at your issue soon ⏲
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-          In the meantime you might want to join the [Wimpys World Discord](https://wimpysworld.io/discord) 🗣 where we have a large community of Linux 🐧 enthusiasts and passionate open source developers 🧑‍💻
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
 
-          You might also be interested in following [Wimpys World Twitch 📡 channel](https://twitch.tv/WimpysWorld) where Wimpy streams let's code video, including this project, several times a week. A back catalog of past live stream and other Linux related content is available on [Wimpys World YouTube 📺 channel](https://youtube.com/WimpysWorld).
-        pr-message: |
-          Hello there 👋
-          Thanks for submitting your first pull request to the deb-get project 💪 We'll try to review your pull request soon ⏲
+          # Dependencies to build the deb
+          # sudo apt-get install build-essential devscripts debhelper -y
 
-          In the meantime you might want to join the [Wimpys World Discord](https://wimpysworld.io/discord) 🗣 where we have a large community of Linux 🐧 enthusiasts and passionate open source developers 🧑‍💻
+          # Dependencies for deb-get itself
+          sudo apt-get install apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
 
-          You might also be interested in following [Wimpys World Twitch 📡 channel](https://twitch.tv/WimpysWorld) where Wimpy streams let's code video, including this project, several times a week. A back catalog of past live stream and other Linux related content is available on [Wimpys World YouTube 📺 channel](https://youtube.com/WimpysWorld).
+          # Build
+          echo "here" && sudo bash ./01-main/packages/deb-build.sh
+
