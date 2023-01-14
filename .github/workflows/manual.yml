@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install depedencies
-        run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
+        run: sudo apt-get install curl #build-essential devscripts debhelper apt apt-transport-https bash coreutils dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
       - name: Checkout code
         uses: actions/checkout@v2
       #- name: Doing the build
