@@ -38,5 +38,3 @@ jobs:
         #  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with: 
           files: ../deb-get_0.3.6-1_all.deb
-          #asset_name: deb-get_0.3.6-1_all.deb
-          #asset_content_type: application/binary
