@@ -12,16 +12,12 @@ jobs:
         run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Doing the build
-        run: sudo bash deb-build.sh
+      #- name: Doing the build
+      #  run: sudo bash deb-build.sh
       - name: simulate build
-        run: echo "simulate"
-      - name: list files1
-        run: ls -la
+        run: echo "simulate" && touch ../deb-get_0.3.6-1_all.deb
       - name: list files2
         run: ls -la ..
-      - name: list files3
-        run: ls -la /home/runner/work/deb-get/deb-get
       - name: Create GitHub Release
         id: create-new-release
         uses: actions/create-release@v1
