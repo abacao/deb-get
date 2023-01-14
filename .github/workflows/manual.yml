@@ -37,7 +37,7 @@ jobs:
     #  run: git clone https://github.com/abacao/deb-get.git
     #- name: Do the build
     #  run: cd deb-get && sudo bash deb-build.sh
-    build:
+  build:
     name: Create Release
     runs-on: ubuntu-latest
     steps:    
