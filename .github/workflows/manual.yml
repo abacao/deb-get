@@ -17,14 +17,15 @@ jobs:
         run: echo "simulate" && touch ../deb-get_0.3.6-1_all.deb
       - name: list files2
         run: ls -la ..
+
       - name: Create GitHub Release
         id: create-new-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: ${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
           body: |
             Changes in this Release
             - Change 1
@@ -34,7 +35,7 @@ jobs:
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.run_number, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         #env:
         #  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with: 
