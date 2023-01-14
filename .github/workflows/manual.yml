@@ -19,7 +19,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  Greetings:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -28,33 +28,23 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
-    # Runs a single command using the runners shell
-    - name: List files
-      run: ls -la 
-    - name: Install depedencies
-      run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
-    #- name: Clone
-    #  run: git clone https://github.com/abacao/deb-get.git
     #- name: Do the build
     #  run: cd deb-get && sudo bash deb-build.sh
-  build: 
-    needs: greet
-    name: Create Release
+  Build: 
+    needs: Greetings
+    name: Build Release
     runs-on: ubuntu-latest
     steps:    
       - name: Checkout code
         uses: actions/checkout@main
-      - name: Create Release
-        id: create_release
+      - name: Install depedencies
+        run: sudo apt-get install build-essential devscripts debhelper apt apt-transport-https bash coreutils curl dpkg gpg grep libc-bin lsb-release sed software-properties-common sudo wget -y
+      - name: Do the build
+        run: cd deb-get && sudo bash deb-build.sh
+  Release:
+    needs: Build
+    name: Release Release
+    runs-on: ubuntu-latest
+    steps:    
+      - name: create Release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
